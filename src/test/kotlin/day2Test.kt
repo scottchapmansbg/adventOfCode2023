@@ -11,4 +11,12 @@ class day2Test {
         println("result = $result")
 
     }
+
+    @Test
+    fun `part 2`() {
+        val day2 = Day2()
+        val result = day2.part2(File("src/main/resources/Day2Data.txt"))
+        println("result = $result")
+
+    }
 }
