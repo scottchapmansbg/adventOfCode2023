@@ -1,4 +1,4 @@
-package Day1
+package Numbers
 
 class NumberExtractor {
     fun extractNumbers(data: List<String>): List<Int> {
