@@ -16,6 +16,8 @@ class Day1Test {
     fun `part 2`() {
         val day1 = Day1()
         val result = day1.part2(File("src/main/resources/Day1Data.txt"))
+        assert(result == 54076)
+
         println("result = $result")
 
     }

@@ -25,11 +25,12 @@ class Day2 {
     }
 
     private fun Game.findLargestOfEachColour():Round{
-        val numberOfBallsRed = Ball("red",this.rounds.map { round -> round.balls.maxOf { ball -> ball.returnNumberOfColour("red")  } }.maxOfOrNull {it}!!)
-        val numberOfBallsGreen = Ball("green",this.rounds.map { round -> round.balls.maxOf { ball -> ball.returnNumberOfColour("green")  } }.maxOfOrNull {it}!!)
-        val numberOfBallsBlue = Ball("blue",this.rounds.map { round -> round.balls.maxOf { ball -> ball.returnNumberOfColour("blue")  } }.maxOfOrNull {it}!!)
+        val numberOfBallsRed = Ball("",this.rounds.map { round -> round.balls.maxOf { ball -> ball.returnNumberOfColour("red")  } }.maxOfOrNull {it}!!)
+        val numberOfBallsGreen = Ball("",this.rounds.map { round -> round.balls.maxOf { ball -> ball.returnNumberOfColour("green")  } }.maxOfOrNull {it}!!)
+        val numberOfBallsBlue = Ball("",this.rounds.map { round -> round.balls.maxOf { ball -> ball.returnNumberOfColour("blue")  } }.maxOfOrNull {it}!!)
         return Round(listOf(numberOfBallsBlue,numberOfBallsGreen,numberOfBallsRed))
     }
+
 
    private fun Ball.returnNumberOfColour(colour:String) : Int{
        return if (this.colour == colour){
