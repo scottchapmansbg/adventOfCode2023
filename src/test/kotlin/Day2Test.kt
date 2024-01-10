@@ -2,7 +2,7 @@ import calander.day2.Day2
 import java.io.File
 import kotlin.test.Test
 
-class day2Test {
+class Day2Test {
     @Test
     fun `part 1`() {
         val day2 = Day2()

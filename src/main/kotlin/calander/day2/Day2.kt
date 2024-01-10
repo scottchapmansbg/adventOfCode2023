@@ -2,7 +2,6 @@ package calander.day2
 
 import fileReading.ReadFileToArrayByLine
 import java.io.File
-import kotlin.math.absoluteValue
 
 class Day2 {
     fun part1(file: File): Int {
