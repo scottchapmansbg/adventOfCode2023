@@ -1,6 +1,6 @@
 package GetDataFromFile;
 
-import kotlin.text.Regex;
+import fileReading.CoordinateFileReader;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -9,8 +9,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class Day1FileTest {
-    private final fileReading.Day1File getDataFromFile = new fileReading.Day1File();
+public class CoordinateFileReaderTest {
+    private final CoordinateFileReader getDataFromFile = new CoordinateFileReader();
 
     @Test
     public void testGetDataFromFile() {

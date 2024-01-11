@@ -4,30 +4,32 @@ import kotlin.text.Regex;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TextConverter {
     public int stringToInt(String word) {
-        Map<String, Integer> numberWords = new HashMap<>();
-        numberWords.put("zero", 0);
-        numberWords.put("one", 1);
-        numberWords.put("two", 2);
-        numberWords.put("three", 3);
-        numberWords.put("four", 4);
-        numberWords.put("five", 5);
-        numberWords.put("six", 6);
-        numberWords.put("seven", 7);
-        numberWords.put("eight", 8);
-        numberWords.put("nine", 9);
+
+        final ArrayList<String> numbers = new ArrayList<>(
+                List.of(
+                        "zero",
+                        "one",
+                        "two",
+                        "three",
+                        "four",
+                        "five",
+                        "six",
+                        "seven",
+                        "eight",
+                        "nine"
+                )
+        );
 
         Regex numberRegex = new Regex("[0-9]");
 
-        if(numberWords.containsKey(word)) {
-            return numberWords.get(word);
+        if (numbers.contains(word)) {
+            return numbers.indexOf(word);
         } else if (numberRegex.matches(word)) {
             return Integer.parseInt(word);
         } else {
@@ -39,7 +41,8 @@ public class TextConverter {
         return data.stream().map(this::getDigitsFromLine).toList();
     }
 
-    private List<Integer> getDigitsFromLine(String line){
+    @NotNull
+    private List<Integer> getDigitsFromLine(String line) {
         Pattern pattern = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(line);
         List<Integer> row = new ArrayList<>();
@@ -50,12 +53,12 @@ public class TextConverter {
     }
 
 
-    public List<List<Integer>> parseDigitsAndWords(List<String> strings) {
+    public List<List<Integer>> parseDigitsAndWords(@NotNull List<String> strings) {
         Regex regex = new Regex("[0-9]|one|two|three|four|five|six|seven|eight|nine");
         return strings.stream().map((line) -> findAllMatchesAndConvertToInt(line, regex)).toList();
     }
 
-    public List<Integer> findAllMatchesAndConvertToInt(String line, Regex regex) {
+    public List<Integer> findAllMatchesAndConvertToInt(String line, @NotNull Regex regex) {
         List<Integer> numbersInFoundInALine = new ArrayList<>();
         Matcher matcher = Pattern.compile(regex.toString(), Pattern.CASE_INSENSITIVE).matcher(line);
         while (matcher.find()) {
