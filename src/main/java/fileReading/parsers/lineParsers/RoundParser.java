@@ -1,9 +1,7 @@
 package fileReading.parsers.lineParsers;
 
-import fileReading.parsers.lineParsers.BallParser;
-import fileReading.parsers.lineParsers.LineParser;
-import game.BallJ;
-import game.RoundJ;
+import game.Ball;
+import game.Round;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -11,17 +9,24 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class RoundParser implements LineParser<RoundJ> {
+public class RoundParser implements LineParser<Round> {
+    private final BallParser ballParser;
+
+    public RoundParser(BallParser ballParser) {
+        this.ballParser = ballParser;
+    }
+
     @Override
-    public RoundJ parseLine(String line) {
+    public Round parseLine(String line) {
         return parseRound(line);
     }
+
     @NotNull
-    private RoundJ parseRound(@NotNull String round) {
-        BallParser ballParser = new BallParser();
-        List<BallJ> result = Arrays.stream(round.split(","))
+    private Round parseRound(@NotNull String round) {
+        System.out.println(round);
+        List<Ball> result = Arrays.stream(round.split(","))
                 .map(ballParser::parseLine)
                 .collect(toList());
-        return new RoundJ(result);
+        return new Round(result);
     }
 }

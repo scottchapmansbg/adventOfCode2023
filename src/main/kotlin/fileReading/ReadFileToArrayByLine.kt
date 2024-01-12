@@ -1,8 +1,8 @@
 package fileReading
 
-import calander.day2.Ball
-import calander.day2.Game
-import calander.day2.Round
+import calander.day2.BallK
+import calander.day2.Gamek
+import calander.day2.RoundK
 import java.io.File
 
 class ReadFileToArrayByLine(val file:File) {
@@ -14,24 +14,24 @@ class ReadFileToArrayByLine(val file:File) {
         return data
     }
 
-    fun readFileToListOfGames():List<Game>{
-        val data = mutableListOf<Game>()
+    fun readFileToListOfGames():List<Gamek>{
+        val data = mutableListOf<Gamek>()
         file.forEachLine { it ->
             val id = it.split(":")[0]
             val game = it.split(":")[1]
-            val balls = game.split(";").map {
+            val ballKS = game.split(";").map {
                 rounds -> rounds.split(",").map { ball ->
                     ball.trim().split(" ")
                 }.map {
-                    Ball(it[1], it[0].toInt())
+                    BallK(it[1], it[0].toInt())
                 }
 
             }
 
-            val rounds = balls.map {
-                Round(it)
+            val roundKS = ballKS.map {
+                RoundK(it)
             }
-            data.add(Game(id, rounds))
+            data.add(Gamek(id, roundKS))
         }
         return data
     }

@@ -1,28 +1,40 @@
 package GetDataFromFile;
 
 import fileReading.GameFileReader;
-import game.GameJ;
+import fileReading.parsers.fileParsers.GamesParser;
+import game.Game;
+import game.Round;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class GameFileReaderTest {
-    private final GameFileReader getDataFromFile = new GameFileReader();
+
     @Test
     public void readGameFileDataIntoGameList() {
-        try {
-            List<GameJ> games =  getDataFromFile.readGameFileDataIntoGameList("Day2Data.txt");
-            assertEquals(games.size(),5);
-            assertEquals(3,games.get(0).getRounds().size());
-            assertEquals(games.get(1).getId(),"Game 2");
+        GamesParser gamesParser = mock(GamesParser.class);
+        BufferedReader bufferedReader = mock(BufferedReader.class);
+        Round round = mock(Round.class);
+        when(gamesParser.parseFile(bufferedReader)).thenReturn(List.of(
+                new Game("Game 1", List.of(round)),
+                new Game("Game 2", List.of()),
+                new Game("Game 3", List.of()),
+                new Game("Game 4", List.of()),
+                new Game("Game 5", List.of())
+        ));
+        GameFileReader getDataFromFile = new GameFileReader(gamesParser,bufferedReader);
+            List<Game> games =  getDataFromFile.readGameFileDataIntoGameList();
+            assertEquals(5 , games.size());
+            assertEquals(games.get(0).getId(),"Game 1");
+            assertEquals(games.get(0).getRounds().get(0),round);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            fail("Exception thrown");
-        }
+
     }
 }

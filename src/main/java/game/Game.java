@@ -4,10 +4,10 @@ import advent.AdventOfCodeData;
 
 import java.util.List;
 
-public class GameJ extends AdventOfCodeData {
-    private String id;
-    private List<RoundJ> rounds;
-    public GameJ(final String id, final List<RoundJ> rounds) {
+public class Game extends AdventOfCodeData {
+    private final String id;
+    private final List<Round> rounds;
+    public Game(final String id, final List<Round> rounds) {
         this.id = id;
         this.rounds = rounds;
     }
@@ -15,7 +15,7 @@ public class GameJ extends AdventOfCodeData {
     public String getId() {
         return id;
     }
-    public List<RoundJ> getRounds() {
+    public List<Round> getRounds() {
         return rounds;
     }
 }

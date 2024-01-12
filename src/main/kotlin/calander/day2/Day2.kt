@@ -23,15 +23,15 @@ class Day2 {
         return gamePower.sum()
     }
 
-    private fun Game.findLargestOfEachColour():Round{
-        val numberOfBallsRed = Ball("",this.rounds.map { round -> round.balls.maxOf { ball -> ball.returnNumberOfColour("red")  } }.maxOfOrNull {it}!!)
-        val numberOfBallsGreen = Ball("",this.rounds.map { round -> round.balls.maxOf { ball -> ball.returnNumberOfColour("green")  } }.maxOfOrNull {it}!!)
-        val numberOfBallsBlue = Ball("",this.rounds.map { round -> round.balls.maxOf { ball -> ball.returnNumberOfColour("blue")  } }.maxOfOrNull {it}!!)
-        return Round(listOf(numberOfBallsBlue,numberOfBallsGreen,numberOfBallsRed))
+    private fun Gamek.findLargestOfEachColour():RoundK{
+        val numberOfBallsRed = BallK("",this.roundKS.map { round -> round.ballKS.maxOf { ball -> ball.returnNumberOfColour("red")  } }.maxOfOrNull {it}!!)
+        val numberOfBallsGreen = BallK("",this.roundKS.map { round -> round.ballKS.maxOf { ball -> ball.returnNumberOfColour("green")  } }.maxOfOrNull {it}!!)
+        val numberOfBallsBlue = BallK("",this.roundKS.map { round -> round.ballKS.maxOf { ball -> ball.returnNumberOfColour("blue")  } }.maxOfOrNull {it}!!)
+        return RoundK(listOf(numberOfBallsBlue,numberOfBallsGreen,numberOfBallsRed))
     }
 
 
-   private fun Ball.returnNumberOfColour(colour:String) : Int{
+   private fun BallK.returnNumberOfColour(colour:String) : Int{
        return if (this.colour == colour){
            this.number
        } else{
@@ -39,22 +39,22 @@ class Day2 {
        }
    }
 
-    private fun Round.multiplyOutBalls():Int {
+    private fun RoundK.multiplyOutBalls():Int {
         return this.getBallNumber().reduce{acc, i -> acc * i}
     }
 
-    private fun Round.getBallNumber():List<Int>{
-        return this.balls.map { it.number }
+    private fun RoundK.getBallNumber():List<Int>{
+        return this.ballKS.map { it.number }
     }
 
-    private fun List<Game>.sumOfIds(): Int{
+    private fun List<Gamek>.sumOfIds(): Int{
         val numbers = this.map { Integer.parseInt(it.id.split(" ")[1]) }
         return numbers.sum()
     }
 
-    private fun Game.isValid(bag:Map<String,Int>): Boolean {
-        for (round in  this.rounds){
-            for (ball in round.balls)
+    private fun Gamek.isValid(bag:Map<String,Int>): Boolean {
+        for (round in  this.roundKS){
+            for (ball in round.ballKS)
             {
                 if (!bag.containsKey(ball.colour) || (ball.number > bag[ball.colour]!!))
                 {

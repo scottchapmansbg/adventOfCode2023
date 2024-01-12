@@ -1,11 +1,11 @@
 package fileReading.parsers.lineParsers;
 
 import fileReading.parsers.listParsers.RoundsParser;
-import game.GameJ;
+import game.Game;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class GameParser implements LineParser<GameJ> {
+public class GameParser implements LineParser<Game> {
 
     private final RoundsParser roundsParser;
 
@@ -13,15 +13,15 @@ public class GameParser implements LineParser<GameJ> {
         this.roundsParser = roundsParser;
     }
     @Override
-    public GameJ parseLine(String data) {
+    public Game parseLine(String data) {
         return parseGame(data);
     }
 
     @NotNull
     @Contract("_ -> new")
-    private GameJ parseGame(@NotNull String line) {
+    private Game parseGame(@NotNull String line) {
         String id = line.split(":")[0];
         String gameRounds = line.split(":")[1];
-        return new GameJ(id, roundsParser.parseList(gameRounds));
+        return new Game(id, roundsParser.parseList(gameRounds));
     }
 }

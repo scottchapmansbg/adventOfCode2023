@@ -2,10 +2,10 @@ package game;
 
 import advent.AdventOfCodeData;
 
-public class BallJ extends AdventOfCodeData {
+public class Ball extends AdventOfCodeData {
     String colour;
     int number;
-    public BallJ(String colour, int number){
+    public Ball(String colour, int number){
         this.colour = colour;
         this.number = number;
     }
